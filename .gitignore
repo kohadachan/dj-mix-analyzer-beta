@@ -1,0 +1,15 @@
+# Sensitive / personal data — must NEVER be committed
+.env
+*.db
+*.db-wal
+*.db-shm
+*.db.bak
+PlayHistory/
+SoundiizExportSamples/
+.venv/
+target/
+node_modules/
+dist/
+__pycache__/
+.DS_Store
+.claude/

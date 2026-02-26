@@ -1,0 +1,106 @@
+name: Bug Report / 不具合報告
+description: 不具合やクラッシュの報告
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        不具合のご報告ありがとうございます。以下の項目をできる範囲で記入してください。
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: OS
+      options:
+        - macOS (Apple Silicon)
+        - macOS (Intel)
+        - Windows 10
+        - Windows 11
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: アプリバージョン
+      description: "Settings タブまたはインストーラーのファイル名で確認できます"
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: installer
+    attributes:
+      label: インストーラーの種類
+      options:
+        - DMG (macOS)
+        - EXE / NSIS (Windows)
+        - MSI (Windows)
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 不具合の内容
+      description: 何が起きたかを具体的に記載してください
+      placeholder: |
+        例: Seratoのセッションファイルをインポートしようとしたら、プログレスバーが途中で止まりエラーが表示された
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 不具合を再現するための手順を記載してください
+      placeholder: |
+        1. Library > Import を開く
+        2. 「Select Folder」でセッションフォルダを選択
+        3. ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待される動作
+      description: 本来どうなるべきだったかを記載してください
+    validations:
+      required: false
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の動作
+      description: 実際に何が起きたかを記載してください（エラーメッセージがあればそのまま記載）
+    validations:
+      required: false
+
+  - type: textarea
+    id: data-source
+    attributes:
+      label: 使用しているDJソフトウェア
+      description: |
+        データの取り込み元として使っているDJソフトウェアと、おおよそのファイル数を教えてください
+      placeholder: |
+        例: Serato DJ Pro、セッションファイル約200個
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: スクリーンショット
+      description: 不具合の画面キャプチャがあれば添付してください
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: その他
+      description: 追加情報があれば記載してください
+    validations:
+      required: false
