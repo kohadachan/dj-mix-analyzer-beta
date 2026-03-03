@@ -22,7 +22,7 @@ DJ Mix Analyzerは、Serato DJ / rekordbox / Traktor のプレイ履歴を読み
 ダウンロード後、ファイルの整合性を確認できます。
 
 ```
-d56aa57b7eb3faed6ea5518dc873c18b707cc569ef3c18d42489f74882d716ad  DJ_Mix_Analyzer_0.2.0_aarch64.dmg
+e49ce003d2803d2285d36b58ffcd0cba4a8ff3f6df903c97e377c8b6580a7dc1  DJ_Mix_Analyzer_0.2.0_aarch64.dmg
 f6a17861c5341f585ad846c61ac14fefab83eeff086c97386ef45c2aa3a88e1a  DJ_Mix_Analyzer_0.2.0_x64-setup.exe
 46b44ccf41bf74c0414ba4e9633f04acdd709a179b846d4b3230273a2102a409  DJ_Mix_Analyzer_0.2.0_x64_en-US.msi
 ```
