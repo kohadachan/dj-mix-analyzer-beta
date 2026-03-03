@@ -13,28 +13,28 @@ DJ Mix Analyzerは、Serato DJ / rekordbox / Traktor のプレイ履歴を読み
 
 | プラットフォーム | ファイル | 備考 |
 |:---:|:---|:---|
-| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.1.0_aarch64.dmg` | macOS 12以降 |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.1.0_x64-setup.exe` | Windows 10以降（推奨） |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.1.0_x64_en-US.msi` | 企業環境向け |
+| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.2.0_aarch64.dmg` | macOS 12以降 |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.0_x64-setup.exe` | Windows 10以降（推奨） |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.0_x64_en-US.msi` | 企業環境向け |
 
 ### ファイル検証（SHA-256）
 
 ダウンロード後、ファイルの整合性を確認できます。
 
 ```
-5eb1ad4d715342d405b1f6f82efb136acfddbc6a42a9fd79dca744934b576bad  DJ_Mix_Analyzer_0.1.0_aarch64.dmg
-d4c0962cd059fad56d477da22f15880f0adc17bd9434c557be34aa8c368ddd15  DJ_Mix_Analyzer_0.1.0_x64-setup.exe
-072201554e3bdac51edacdf2cd0b756221361f588b436246d68a10064cad9591  DJ_Mix_Analyzer_0.1.0_x64_en-US.msi
+a6a567e3554017484c968c15e31def5b97c6df9f913d87d914b6a9bd7f7e6a45  DJ_Mix_Analyzer_0.2.0_aarch64.dmg
+f6a17861c5341f585ad846c61ac14fefab83eeff086c97386ef45c2aa3a88e1a  DJ_Mix_Analyzer_0.2.0_x64-setup.exe
+46b44ccf41bf74c0414ba4e9633f04acdd709a179b846d4b3230273a2102a409  DJ_Mix_Analyzer_0.2.0_x64_en-US.msi
 ```
 
 **macOS での確認方法:**
 ```bash
-shasum -a 256 ~/Downloads/DJ_Mix_Analyzer_0.1.0_aarch64.dmg
+shasum -a 256 ~/Downloads/DJ_Mix_Analyzer_0.2.0_aarch64.dmg
 ```
 
 **Windows での確認方法 (PowerShell):**
 ```powershell
-Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.1.0_x64-setup.exe" -Algorithm SHA256
+Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.0_x64-setup.exe" -Algorithm SHA256
 ```
 
 ---
@@ -100,10 +100,16 @@ Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.1.0_x64-setup.exe" -A
 | タブ | 内容 |
 |:---|:---|
 | **Dashboard** | トラック数、セッション数、Top Tracks/Artists、曜日・時間帯分析 |
-| **Tracks** | 全トラック一覧、再生回数・BPM・Key での並べ替え |
-| **Transitions** | トラック間の遷移パターン分析、チェイン検出 |
+| **Tracks** | 全トラック一覧（Key・BPM・Tag フィルタ、インライン詳細展開、表示件数切替） |
+| **Transitions** | トランジション統計、Top Pairs、N-Track Chains、Artist Transitions、Deck Analysis |
+| **Insights** | Hub Tracks、Entropy Map、Bridge Tracks、Set Diversity、Escape Routes |
+| **Flow** | 指定トラックの前後遷移を可視化 |
+| **Network** | トランジションネットワークグラフ（ノード内に Key・BPM 表示） |
+| **Progression** | セッションごとの BPM・Key 変化分析 |
+| **Escapes** | 定番遷移からの脱出候補提案（トラック検索対応） |
+| **Rediscover** | 最近使っていないが以前よく使った曲の再発見 |
 | **Explorer** | セットリスト手動構築（次トラック候補をリアルタイム提案） |
-| **Generator** | エネルギーカーブに基づくセットリスト自動生成 |
+| **Generator** | 遷移実績に基づくセットリスト自動生成 |
 | **Setlists** | 保存済みセットリストの管理・CSV出力 |
 | **Settings** | Key表記（Camelot/Musical）、フォントサイズ、テーマ、エクスポート先 |
 
