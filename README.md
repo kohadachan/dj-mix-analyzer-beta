@@ -13,28 +13,28 @@ DJ Mix Analyzerは、Serato DJ / rekordbox / Traktor のプレイ履歴を読み
 
 | プラットフォーム | ファイル | 備考 |
 |:---:|:---|:---|
-| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.2.1_aarch64.dmg` | macOS 12以降 |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.1_x64-setup.exe` | Windows 10以降（推奨） |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.1_x64_en-US.msi` | 企業環境向け |
+| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.2.2_aarch64.dmg` | macOS 12以降 |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.2_x64-setup.exe` | Windows 10以降（推奨） |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.2_x64_en-US.msi` | 企業環境向け |
 
 ### ファイル検証（SHA-256）
 
 ダウンロード後、ファイルの整合性を確認できます。
 
 ```
-ecbd34943e2ae2b8f1d51d431146cfc25b382409c5befe82f30781db1c282201  DJ_Mix_Analyzer_0.2.1_aarch64.dmg
-91390ead2567f6e0888f37753b4600d610087fa2c0b0a9744d820864cf9362ad  DJ_Mix_Analyzer_0.2.1_x64-setup.exe
-feb76bb1e6afc499cf8ca0bdd9eca7e331807ef2e71ee52dfd7cc595b16b47ef  DJ_Mix_Analyzer_0.2.1_x64_en-US.msi
+666732886a4c8ac8ff556d9b22d51748953c13b48528511f71279533cb1a939e  DJ_Mix_Analyzer_0.2.2_aarch64.dmg
+(Windows CIビルド完了後に更新)  DJ_Mix_Analyzer_0.2.2_x64-setup.exe
+(Windows CIビルド完了後に更新)  DJ_Mix_Analyzer_0.2.2_x64_en-US.msi
 ```
 
 **macOS での確認方法:**
 ```bash
-shasum -a 256 ~/Downloads/DJ_Mix_Analyzer_0.2.1_aarch64.dmg
+shasum -a 256 ~/Downloads/DJ_Mix_Analyzer_0.2.2_aarch64.dmg
 ```
 
 **Windows での確認方法 (PowerShell):**
 ```powershell
-Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.1_x64-setup.exe" -Algorithm SHA256
+Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.2_x64-setup.exe" -Algorithm SHA256
 ```
 
 ---
