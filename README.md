@@ -82,13 +82,51 @@ Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.0_x64-setup.exe" -A
 ### データ取り込み（Import）
 
 1. 画面上部の **「Library」** タブ → **「Import」** サブタブを選択
-2. **「Select Folder」** をクリック
-3. DJソフトウェアのプレイ履歴フォルダを選択:
-   - **Serato DJ**: `_Serato_/History/Sessions/` フォルダ内の `.txt` / `.csv` ファイル
-   - **rekordbox**: エクスポートした `.xml` / `.tsv` ファイル
-   - **Traktor**: `collection.nml` ファイル
-4. ファイルが検出され、インポートが実行されます
-5. 完了後 **「Dashboard」** タブで統計が確認できます
+2. アプリ内の **「How to export from your DJ software」** ガイドで、お使いのDJソフトの手順を確認できます
+3. 以下の方法でファイルを取り込みます:
+   - ファイルやフォルダをドロップゾーンに **ドラッグ＆ドロップ**
+   - または **「Browse Folder...」** ボタンからフォルダを選択
+4. 完了後 **「Dashboard」** タブで統計が確認できます
+
+#### DJソフト別エクスポート手順
+
+<details>
+<summary>Serato DJ</summary>
+
+Serato DJ はセッションごとにファイルを自動保存します。
+
+- **Mac**: `~/Music/_Serato_/History/Sessions/`
+- **Windows**: `Music\_Serato_\History\Sessions\`
+
+Sessions フォルダをそのままドラッグ＆ドロップすれば、全セッションを一括インポートできます。
+
+</details>
+
+<details>
+<summary>rekordbox</summary>
+
+1. rekordbox を起動
+2. **ファイル → コレクションをxml形式でエクスポート** を選択
+3. XMLファイルを任意の場所に保存
+4. そのXMLファイルをドラッグ＆ドロップ、または「Browse」で選択
+
+> **ヒント**: この1ファイルにプレイ履歴全体が含まれます。BPM・Key情報も含まれるため、別途 Enrich を実行する必要はありません。
+>
+> ※ rekordbox のヒストリーは1件ずつしかエクスポートできませんが、「コレクションをxml形式でエクスポート」を使えば**全履歴を1回で**エクスポートできます。
+
+</details>
+
+<details>
+<summary>Traktor</summary>
+
+Traktor のコレクションファイルを直接インポートします。
+
+- **Mac**: `~/Documents/Native Instruments/Traktor X.X.X/collection.nml`
+- **Windows**: `Documents\Native Instruments\Traktor X.X.X\collection.nml`
+
+collection.nml ファイルをドラッグ＆ドロップ、または「Browse」で選択してください。
+
+</details>
 
 ### BPM / Key の付与（Enrich）
 
