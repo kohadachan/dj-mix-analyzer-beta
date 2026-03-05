@@ -23,8 +23,8 @@ DJ Mix Analyzerは、Serato DJ / rekordbox / Traktor のプレイ履歴を読み
 
 ```
 666732886a4c8ac8ff556d9b22d51748953c13b48528511f71279533cb1a939e  DJ_Mix_Analyzer_0.2.2_aarch64.dmg
-(Windows CIビルド完了後に更新)  DJ_Mix_Analyzer_0.2.2_x64-setup.exe
-(Windows CIビルド完了後に更新)  DJ_Mix_Analyzer_0.2.2_x64_en-US.msi
+cd49b9f13451174a30c629b5fca2a024813f19aa4969cc3839b68aebf939bbb9  DJ_Mix_Analyzer_0.2.2_x64-setup.exe
+5ff90d8d1c21a8a9913df5154bc2a119bac4a02c57e062dbfb7c7bbadfe0347a  DJ_Mix_Analyzer_0.2.2_x64_en-US.msi
 ```
 
 **macOS での確認方法:**
