@@ -96,66 +96,91 @@ Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.5_x64-setup.exe" -A
 | **データの流れ** | ファイル → 新規セッション＋トラック作成 | ライブラリ → 既存トラックのBPM/Key列を更新 |
 | **操作場所** | Library → Import のドロップゾーン | Library → Import 下部の Enrich セクション |
 
-#### DJソフト別エクスポート手順（Import）
+#### DJソフト別 推奨取り込み手順
+
+各DJソフトウェアで**最も効率的にデータを取り込む方法**をまとめています。
 
 <details>
-<summary>Serato DJ</summary>
+<summary>Serato DJ — 2ステップ（Import → Enrich）</summary>
 
-Serato DJ はセッションごとにファイルを自動保存します。
+Seratoではプレイ履歴とトラックメタデータが**別々のファイル**に保存されているため、2ステップで取り込みます。
+
+**ステップ1: Import（プレイ履歴の取り込み）**
+
+Serato DJ はプレイするたびにセッションファイル（`.txt`）を自動保存しています。このフォルダをまるごと取り込むのが最も簡単です。
 
 - **Mac**: `~/Music/_Serato_/History/Sessions/`
 - **Windows**: `Music\_Serato_\History\Sessions\`
 
-Sessions フォルダをそのままドラッグ＆ドロップすれば、全セッションを一括インポートできます。
+Sessions フォルダをそのままドラッグ＆ドロップすれば、過去の全セッションを一括インポートできます。
+重複チェック機能があるため、同じフォルダを何度取り込んでも二重登録にはなりません。
 
-> **補足**: Serato のセッションファイルにはBPM/Key情報が含まれません。Import後に Enrich を実行して補完してください。
+> **セッションファイルにはBPM/Key情報が含まれません。** Serato のセッションファイルは曲名・アーティスト・再生時刻・デッキ情報のみを記録しており、BPM や Key は保存されない仕様です。次のステップで補完します。
+
+**ステップ2: Enrich（BPM/Key の補完）**
+
+Serato の内部データベース（`database V2`）には、UIの表示設定に関係なく BPM・Key などのメタデータがすべて保持されています。Enrich 機能はこのデータベースから BPM/Key を読み取り、Import 済みのトラックに自動で付与します。
+
+1. **「Library」** → **「Import」** 下部の Enrich セクション
+2. Serato のライブラリが自動検出されるので、選択して **「Enrich」** を実行
+
+> **CSV エクスポートについて**: Serato の History タブから CSV をエクスポートすることもできますが、CSV に含まれるカラムは**その時点で画面に表示している項目に依存**します（例: Key カラムを表示していなければ CSV にも含まれません）。セッションファイル（`.txt`）+ Enrich の方が確実です。
 
 </details>
 
 <details>
-<summary>rekordbox（推奨: master.db）</summary>
+<summary>rekordbox — 1ステップ（master.db だけでOK）</summary>
 
-rekordbox の `master.db` ファイルを直接読み込みます。プレイ履歴（HISTORY）を**BPM・Key・Genre付き**でインポートできます。
+rekordbox は `master.db` ファイル1つにプレイ履歴もトラックメタデータもすべて格納しているため、**1回のインポートで完結**します。
 
 1. `master.db` ファイルを探す:
    - **Mac**: `~/Library/Pioneer/rekordbox/master.db`
    - **Windows**: `%APPDATA%\Pioneer\rekordbox\master.db`
 2. `master.db` をドラッグ＆ドロップ、または「Browse」で選択
 
-> **ヒント**: master.db は読み取り専用でアクセスします。rekordbox のデータが変更されることはありません。
-> BPM・Key・Genre も同時に取り込まれるため、別途 Enrich を実行する必要はありません。
+これだけで**プレイ履歴 + BPM + Key + Genre** がすべて取り込まれます。Enrich の実行は不要です。
 
-**XMLエクスポートについて**: rekordbox の「コレクションをxml形式でエクスポート」で書き出したXMLファイルも読み込めますが、XML にはプレイ履歴（HISTORY）が含まれません。Import ではなく Enrich ソースとしてのみ使用してください。
+> **ヒント**: master.db は読み取り専用でアクセスします。rekordbox のデータが変更されることはありません。
+
+> **XMLエクスポートについて**: rekordbox の「コレクションをxml形式でエクスポート」で書き出したXMLファイルも読み込めますが、XML にはプレイ履歴（HISTORY）が含まれません。Enrich ソース（BPM/Key補完用）としてのみ使用できます。
 
 </details>
 
 <details>
-<summary>Traktor</summary>
+<summary>Traktor — 1ステップ（collection.nml だけでOK）</summary>
 
-Traktor のコレクションファイルを直接インポートします。
+Traktor も `collection.nml` ファイル1つにプレイ履歴とトラックメタデータが含まれているため、**1回のインポートで完結**します。
 
 - **Mac**: `~/Documents/Native Instruments/Traktor X.X.X/collection.nml`
 - **Windows**: `Documents\Native Instruments\Traktor X.X.X\collection.nml`
 
 collection.nml ファイルをドラッグ＆ドロップ、または「Browse」で選択してください。
+プレイ履歴 + BPM + Key がすべて取り込まれます。
 
 </details>
 
+#### まとめ: アプリ別の取り込みフロー
+
+| DJソフト | 手順 | Import ソース | Enrich 必要？ |
+|:---|:---|:---|:---:|
+| **Serato DJ** | 2ステップ | `Sessions/` フォルダ → Enrich | **必要** |
+| **rekordbox** | 1ステップ | `master.db` | 不要 |
+| **Traktor** | 1ステップ | `collection.nml` | 不要 |
+
 ### BPM / Key の付与（Enrich）
 
-Import済みのトラックにBPM・Key情報を補完する機能です。
+Import済みのトラックにBPM・Key情報を補完する機能です。主に **Serato ユーザー**が使用します（rekordbox / Traktor は Import 時に自動取得されます）。
 
 1. **「Library」** タブ → **「Import」** サブタブ下部の **Enrich** セクション
 2. DJソフトウェアのライブラリが自動検出されます（検出されない場合は「Add Source...」で手動指定）
 3. 検出されたソースを選択して **「Enrich」** を実行
-4. Serato / rekordbox / Traktor のライブラリからBPM・Key情報が既存トラックに付与されます
 
 | ソース | Enrich対象データ | 備考 |
 |:---|:---|:---|
 | **Serato** `_Serato_/` | BPM, Key | database V2 + streaming Metadata |
-| **rekordbox** `master.db` | BPM, Key | 自動検出で最優先 |
+| **rekordbox** `master.db` | BPM, Key | Import時に取得済みなら不要 |
 | **rekordbox** XML | BPM, Key | master.db がない場合のフォールバック |
-| **Traktor** `collection.nml` | BPM, Key | — |
+| **Traktor** `collection.nml` | BPM, Key | Import時に取得済みなら不要 |
 
 ### 主な機能
 
