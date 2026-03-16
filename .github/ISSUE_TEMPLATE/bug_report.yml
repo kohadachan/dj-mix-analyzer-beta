@@ -1,11 +1,12 @@
 name: Bug Report / 不具合報告
-description: 不具合やクラッシュの報告
+description: Report a bug or crash / 不具合やクラッシュの報告
 title: "[Bug] "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
+        Thank you for reporting a bug! Please fill in the fields below as much as possible.
         不具合のご報告ありがとうございます。以下の項目をできる範囲で記入してください。
 
   - type: dropdown
@@ -23,16 +24,16 @@ body:
   - type: input
     id: version
     attributes:
-      label: アプリバージョン
-      description: "Settings タブまたはインストーラーのファイル名で確認できます"
-      placeholder: "0.1.0"
+      label: App Version / アプリバージョン
+      description: "Check in Settings tab or installer filename / Settings タブまたはインストーラーのファイル名で確認できます"
+      placeholder: "0.2.5"
     validations:
       required: true
 
   - type: dropdown
     id: installer
     attributes:
-      label: インストーラーの種類
+      label: Installer Type / インストーラーの種類
       options:
         - DMG (macOS)
         - EXE / NSIS (Windows)
@@ -43,9 +44,10 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: 不具合の内容
-      description: 何が起きたかを具体的に記載してください
+      label: Bug Description / 不具合の内容
+      description: Describe what happened / 何が起きたかを具体的に記載してください
       placeholder: |
+        e.g.: When importing Serato session files, the progress bar stopped midway and an error appeared.
         例: Seratoのセッションファイルをインポートしようとしたら、プログレスバーが途中で止まりエラーが表示された
     validations:
       required: true
@@ -53,11 +55,11 @@ body:
   - type: textarea
     id: steps
     attributes:
-      label: 再現手順
-      description: 不具合を再現するための手順を記載してください
+      label: Steps to Reproduce / 再現手順
+      description: How to reproduce the bug / 不具合を再現するための手順を記載してください
       placeholder: |
-        1. Library > Import を開く
-        2. 「Select Folder」でセッションフォルダを選択
+        1. Go to Library > Import
+        2. Select the session folder via "Browse Folder..."
         3. ...
     validations:
       required: false
@@ -65,26 +67,28 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: 期待される動作
-      description: 本来どうなるべきだったかを記載してください
+      label: Expected Behavior / 期待される動作
+      description: What should have happened / 本来どうなるべきだったか
     validations:
       required: false
 
   - type: textarea
     id: actual
     attributes:
-      label: 実際の動作
-      description: 実際に何が起きたかを記載してください（エラーメッセージがあればそのまま記載）
+      label: Actual Behavior / 実際の動作
+      description: What actually happened (include error messages if any) / 実際に何が起きたか（エラーメッセージがあればそのまま記載）
     validations:
       required: false
 
   - type: textarea
     id: data-source
     attributes:
-      label: 使用しているDJソフトウェア
+      label: DJ Software Used / 使用しているDJソフトウェア
       description: |
+        Which DJ software and approximately how many files?
         データの取り込み元として使っているDJソフトウェアと、おおよそのファイル数を教えてください
       placeholder: |
+        e.g.: Serato DJ Pro, ~200 session files
         例: Serato DJ Pro、セッションファイル約200個
     validations:
       required: false
@@ -92,15 +96,15 @@ body:
   - type: textarea
     id: screenshots
     attributes:
-      label: スクリーンショット
-      description: 不具合の画面キャプチャがあれば添付してください
+      label: Screenshots / スクリーンショット
+      description: Attach screenshots if available / 不具合の画面キャプチャがあれば添付してください
     validations:
       required: false
 
   - type: textarea
     id: additional
     attributes:
-      label: その他
-      description: 追加情報があれば記載してください
+      label: Additional Info / その他
+      description: Any additional context / 追加情報があれば記載してください
     validations:
       required: false

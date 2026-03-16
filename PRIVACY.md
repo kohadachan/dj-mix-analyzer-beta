@@ -1,73 +1,75 @@
-# プライバシーポリシー / Privacy & Safety
+**English** | [日本語](PRIVACY.ja.md)
 
-最終更新: 2026-02-27
+# Privacy Policy
 
-## 概要
+Last updated: 2026-03-17
 
-DJ Mix Analyzerは完全にオフラインで動作するデスクトップアプリケーションです。ユーザーのデータはすべてローカルマシン上に保存され、外部に送信されることはありません。
+## Overview
 
-## 技術的根拠
+DJ Mix Analyzer is a fully offline desktop application. All user data is stored locally on your machine and is never transmitted externally.
 
-以下の記載内容は、ソースコードの実装に基づいて確認された事実です。
+## Technical Basis
 
-### 1. ネットワーク通信: なし
+The following statements are verified facts based on the source code implementation.
 
-| 確認項目 | 結果 |
+### 1. Network Communication: None
+
+| Check | Result |
 |:---|:---|
-| Rust依存ライブラリにHTTPクライアントが含まれるか | **含まれない**（Cargo.toml に reqwest, hyper, ureq 等なし） |
-| フロントエンドに外部通信コードがあるか | **なし**（fetch(), XMLHttpRequest 等の呼び出しなし） |
-| CSPで外部接続が許可されているか | **許可されていない**（`connect-src ipc: http://ipc.localhost` のみ） |
-| Tauri capabilitiesでネットワークが許可されているか | **許可されていない**（`core:default` と `dialog:default` のみ） |
+| HTTP client libraries in Rust dependencies | **Not included** (no reqwest, hyper, ureq, etc. in Cargo.toml) |
+| External communication code in frontend | **None** (no fetch(), XMLHttpRequest, etc.) |
+| External connections allowed by CSP | **Not allowed** (`connect-src ipc: http://ipc.localhost` only) |
+| Network permitted by Tauri capabilities | **Not permitted** (`core:default` and `dialog:default` only) |
 
-### 2. ファイルアクセス
+### 2. File Access
 
-**読み取るファイル:**
-- ユーザーがファイルダイアログで選択したDJソフトウェアのセッション/ライブラリファイル
-- アプリ自身のSQLiteデータベース
+**Files read:**
+- DJ software session/library files explicitly selected by the user via the file dialog
+- The app's own SQLite database
 
-**書き込むファイル:**
-- `dj_history.db`（アプリデータフォルダ内のSQLiteデータベース）
-- `dj_history.db-wal`, `dj_history.db-shm`（SQLite WALモードの一時ファイル）
-- ユーザーが明示的に指定したディレクトリへのCSVエクスポートファイル
+**Files written:**
+- `dj_history.db` (SQLite database in the app data folder)
+- `dj_history.db-wal`, `dj_history.db-shm` (SQLite WAL mode temporary files)
+- CSV export files to a directory explicitly specified by the user
 
-**改変しないファイル:**
-- DJソフトウェアの元ファイル（Serato、rekordbox、Traktorのライブラリ・セッションファイル）は読み取り専用でアクセスされ、変更されることはありません
+**Files never modified:**
+- DJ software original files (Serato, rekordbox, Traktor library and session files) are accessed read-only and are never modified
 
-### 3. 外部プロセス
+### 3. External Processes
 
-サブプロセスの起動は行いません。全処理はアプリケーション内部で完結します。
+No subprocesses are launched. All processing is self-contained within the application.
 
-### 4. テレメトリ
+### 4. Telemetry
 
-使用状況の収集、クラッシュレポート、分析用トラッキングは実装されていません。
+No usage data collection, crash reporting, or analytics tracking is implemented.
 
-### 5. 保存データの内容
+### 5. Stored Data
 
-SQLiteデータベースに保存されるデータ:
+Data stored in the SQLite database:
 
-- セッション情報（ファイル名、日時、トラック数）
-- トラック情報（曲名、アーティスト名、BPM、Key）
-- セッション内のトラック再生順序・再生時間
-- ユーザー設定（Key表記、テーマ、フォントサイズ、エクスポートパス）
-- 保存したセットリスト
+- Session information (filename, date/time, track count)
+- Track information (title, artist, BPM, Key)
+- Track play order and duration within sessions
+- User settings (Key notation, theme, font size, export path)
+- Saved setlists
 
-個人を特定する情報（氏名、メールアドレス、アカウント情報等）は保存されません。
+No personally identifiable information (name, email address, account information, etc.) is stored.
 
-### 6. データ保存場所
+### 6. Data Storage Location
 
-| OS | パス |
+| OS | Path |
 |:---|:---|
 | macOS | `~/Library/Application Support/com.kohadachan.dj-mix-analyzer/dj_history.db` |
 | Windows | `%APPDATA%\com.kohadachan.dj-mix-analyzer\dj_history.db` |
 
-### 7. データの完全削除
+### 7. Complete Data Removal
 
-アプリをアンインストールしても、上記のデータフォルダは自動削除されません。完全に削除するには、上記パスのフォルダを手動で削除してください。
+Uninstalling the app does not automatically delete the data folder above. To completely remove all data, manually delete the folder at the path shown above.
 
-## 未確認事項
+## Unverified Items
 
-- Tauri フレームワーク自体が内部的にネットワーク通信を行う可能性については、Tauri の公式ドキュメントを参照してください。現時点でそのような動作は確認されていませんが、フレームワーク内部の動作すべてを保証するものではありません。
+- Whether the Tauri framework itself performs any internal network communication is outside the scope of this verification. Please refer to the official Tauri documentation. No such behavior has been observed, but we do not guarantee the internal behavior of the framework in its entirety.
 
-## 問い合わせ
+## Contact
 
-プライバシーに関する質問は [Issue](../../issues) からご連絡ください。
+For privacy-related questions, please reach out via [Issues](../../issues).

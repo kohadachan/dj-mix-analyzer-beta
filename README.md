@@ -1,25 +1,27 @@
-# DJ Mix Analyzer — Beta Test Release
+**English** | [日本語](README.ja.md)
 
-> **ベータ版（テスト公開）**: このリリースは限定的なテスト公開です。公開期間は約1週間を予定しています。
-> フィードバックや不具合報告は [Issue](../../issues) からお願いします。
+# DJ Mix Analyzer — Beta Release
 
-DJ Mix Analyzerは、Serato DJ / rekordbox / Traktor のプレイ履歴を読み込み、トラック使用傾向・トランジション分析・セットリスト構築などを行うデスクトップアプリケーションです。[Tauri](https://tauri.app/)（Rust製のデスクトップアプリ開発フレームワーク）を使用して開発しています。
+> **Beta**: This is a limited beta release for testing.
+> Please report bugs or feedback via [Issues](../../issues).
+
+DJ Mix Analyzer imports play history from Serato DJ / rekordbox / Traktor, and provides track usage trends, transition analysis, setlist building, and more. Built with [Tauri](https://tauri.app/) (Rust + React).
 
 ---
 
-## ダウンロード
+## Download
 
-[Releases ページ](../../releases) から最新版をダウンロードしてください。
+Download the latest version from the [Releases page](../../releases).
 
-| プラットフォーム | ファイル | 備考 |
+| Platform | File | Notes |
 |:---:|:---|:---|
-| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.2.5_aarch64.dmg` | macOS 12以降 |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.5_x64-setup.exe` | Windows 10以降（推奨） |
-| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.5_x64_en-US.msi` | 企業環境向け |
+| **macOS** (Apple Silicon) | `DJ_Mix_Analyzer_0.2.5_aarch64.dmg` | macOS 12+ |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.5_x64-setup.exe` | Windows 10+ (recommended) |
+| **Windows** (64-bit) | `DJ_Mix_Analyzer_0.2.5_x64_en-US.msi` | For enterprise environments |
 
-### ファイル検証（SHA-256）
+### File Verification (SHA-256)
 
-ダウンロード後、ファイルの整合性を確認できます。
+You can verify the integrity of your download:
 
 ```
 f69866e4fcf43515bc9f1239bbbdc0810c79444f8af5df3635f628c68e90aa4c  DJ_Mix_Analyzer_0.2.5_aarch64.dmg
@@ -27,250 +29,247 @@ c08a6921d86e785674653d8745fbd06ffb58019f66c162fd87defa39a7e0b7b4  DJ_Mix_Analyze
 82bfa552e2fd309e2abb138fc76a624f01958508e40b920db0e692739b1691e6  DJ_Mix_Analyzer_0.2.5_x64_en-US.msi
 ```
 
-**macOS での確認方法:**
+**macOS:**
 ```bash
 shasum -a 256 ~/Downloads/DJ_Mix_Analyzer_0.2.5_aarch64.dmg
 ```
 
-**Windows での確認方法 (PowerShell):**
+**Windows (PowerShell):**
 ```powershell
 Get-FileHash "$env:USERPROFILE\Downloads\DJ_Mix_Analyzer_0.2.5_x64-setup.exe" -Algorithm SHA256
 ```
 
 ---
 
-## インストール方法
+## Installation
 
 ### macOS
 
-1. `.dmg` ファイルを開く
-2. 「DJ Mix Analyzer」を「Applications」フォルダにドラッグ
-3. 初回起動時に **「開発元が未確認」** の警告が表示されます
-   - ダイアログ右上の？ボタンをクリック
-   - 「システム設定」→「プライバシーとセキュリティ」→「このまま開く」を選択
-   - または `.app` を右クリック →「開く」→「開く」で起動
+1. Open the `.dmg` file
+2. Drag "DJ Mix Analyzer" to the "Applications" folder
+3. On first launch, you'll see an **"unidentified developer"** warning:
+   - Click the **?** button in the top-right corner of the dialog
+   - Go to **System Settings** → **Privacy & Security** → click **"Open Anyway"**
+   - Or right-click the `.app` → "Open" → "Open"
 
-> **なぜ警告が出るのか**: Apple Developer Programによるコード署名を行っていないためです。アプリの安全性については後述の「プライバシーと安全性」セクションをご確認ください。
+> **Why the warning?** The app is not signed with an Apple Developer certificate. See the "Privacy & Safety" section below for details on the app's security.
 
 ### Windows
 
-1. `.exe` ファイル（NSIS installer）を実行
-2. **Windows SmartScreen** の警告が表示される場合があります:
-   - 「詳細情報」をクリック → 「実行」を選択
-3. インストーラーの指示に従い、インストール完了
+1. Run the `.exe` file (NSIS installer)
+2. If **Windows SmartScreen** appears:
+   - Click "More info" → "Run anyway"
+3. Follow the installer instructions
 
-> **なぜ警告が出るのか**: Microsoft認証のコード署名証明書を取得していないためです。これはベータ版の個人開発ソフトウェアでは一般的です。
+> **Why the warning?** The app is not signed with a Microsoft-certified code signing certificate. This is common for beta software from independent developers.
 
-> **確認ポイント**:
-> - ダウンロード元がこのGitHubリポジトリの Releases ページであること
-> - ファイルのSHA-256ハッシュが上記の値と一致すること
-> - ファイルサイズが著しく異なっていないこと（.exe は約3.5MB、.msi は約5MB）
+> **Verification tips:**
+> - Confirm the download came from this GitHub repository's Releases page
+> - Verify the SHA-256 hash matches the values above
+> - Check that the file size is reasonable (~3.5 MB for .exe, ~5 MB for .msi)
 
-### アンインストール
+### Uninstall
 
-- **macOS**: `Applications` フォルダから「DJ Mix Analyzer」をゴミ箱に移動。データも削除する場合は `~/Library/Application Support/com.kohadachan.dj-mix-analyzer/` を削除。
-- **Windows**: 「設定」→「アプリ」→「DJ Mix Analyzer」→「アンインストール」。データも削除する場合は `%APPDATA%\com.kohadachan.dj-mix-analyzer\` を削除。
+- **macOS**: Move "DJ Mix Analyzer" from `Applications` to Trash. To also remove data: delete `~/Library/Application Support/com.kohadachan.dj-mix-analyzer/`
+- **Windows**: Settings → Apps → "DJ Mix Analyzer" → Uninstall. To also remove data: delete `%APPDATA%\com.kohadachan.dj-mix-analyzer\`
 
 ---
 
-## 使い方
+## Usage
 
-### 初回起動
+### First Launch
 
-アプリを起動すると、空のダッシュボードが表示されます。データを取り込むことで分析が開始できます。
+The app opens with an empty dashboard. Import your DJ play history to get started.
 
-### データ取り込み（Import）
+### Importing Data
 
-1. 画面上部の **「Library」** タブ → **「Import」** サブタブを選択
-2. アプリ内の **「How to export from your DJ software」** ガイドで、お使いのDJソフトの手順を確認できます
-3. 以下の方法でファイルを取り込みます:
-   - ファイルやフォルダをドロップゾーンに **ドラッグ＆ドロップ**
-   - または **「Browse Folder...」** ボタンからフォルダを選択
-4. 完了後 **「Dashboard」** タブで統計が確認できます
+1. Go to the **"Library"** tab → **"Import"** sub-tab
+2. Check the in-app **"How to export from your DJ software"** guide
+3. Import files by:
+   - **Drag & drop** files or folders onto the drop zone
+   - Or click **"Browse Folder..."** to select a folder
+4. After import, check the **"Dashboard"** tab for your stats
 
-#### Import と Enrich の違い
+#### Import vs. Enrich
 
-| | **Import**（セッション取り込み） | **Enrich**（BPM / Key 付与） |
+| | **Import** (Session Import) | **Enrich** (BPM / Key) |
 |:---|:---|:---|
-| **目的** | プレイ履歴（セッション＋トラック）をDBに登録 | 既存トラックにBPM・Key情報を補完 |
-| **データの流れ** | ファイル → 新規セッション＋トラック作成 | ライブラリ → 既存トラックのBPM/Key列を更新 |
-| **操作場所** | Library → Import のドロップゾーン | Library → Import 下部の Enrich セクション |
+| **Purpose** | Register play history (sessions + tracks) to the database | Add BPM & Key metadata to existing tracks |
+| **Data flow** | Files → new sessions & tracks created | Library → existing tracks' BPM/Key columns updated |
+| **Location** | Library → Import drop zone | Library → Import, Enrich section below |
 
-#### DJソフト別 推奨取り込み手順
+#### Recommended Import Workflow by DJ Software
 
-各DJソフトウェアで**最も効率的にデータを取り込む方法**をまとめています。
+Here's the most efficient way to get your data into DJ Mix Analyzer for each DJ software.
 
 <details>
-<summary>Serato DJ — 2ステップ（Import → Enrich）</summary>
+<summary>Serato DJ — 2 Steps (Import → Enrich)</summary>
 
-Seratoではプレイ履歴とトラックメタデータが**別々のファイル**に保存されているため、2ステップで取り込みます。
+Serato stores play history and track metadata in **separate files**, so importing requires two steps.
 
-**ステップ1: Import（プレイ履歴の取り込み）**
+**Step 1: Import (Play History)**
 
-Serato DJ はプレイするたびにセッションファイル（`.txt`）を自動保存しています。このフォルダをまるごと取り込むのが最も簡単です。
+Serato DJ automatically saves a session file (`.txt`) every time you play. Import the entire folder at once:
 
 - **Mac**: `~/Music/_Serato_/History/Sessions/`
 - **Windows**: `Music\_Serato_\History\Sessions\`
 
-Sessions フォルダをそのままドラッグ＆ドロップすれば、過去の全セッションを一括インポートできます。
-重複チェック機能があるため、同じフォルダを何度取り込んでも二重登録にはなりません。
+Drag & drop the Sessions folder to import all past sessions at once.
+Duplicate detection prevents the same sessions from being imported twice, so it's safe to re-import.
 
-> **セッションファイルにはBPM/Key情報が含まれません。** Serato のセッションファイルは曲名・アーティスト・再生時刻・デッキ情報のみを記録しており、BPM や Key は保存されない仕様です。次のステップで補完します。
+> **Session files do not contain BPM/Key data.** Serato's session files only record track name, artist, play time, and deck info. BPM and Key are not included. The next step will fill those in.
 
-**ステップ2: Enrich（BPM/Key の補完）**
+**Step 2: Enrich (Add BPM/Key)**
 
-Serato の内部データベース（`database V2`）には、UIの表示設定に関係なく BPM・Key などのメタデータがすべて保持されています。Enrich 機能はこのデータベースから BPM/Key を読み取り、Import 済みのトラックに自動で付与します。
+Serato's internal database (`database V2`) stores all track metadata — including BPM and Key — regardless of your UI column display settings. The Enrich feature reads this database and automatically fills in BPM/Key for your imported tracks.
 
-1. **「Library」** → **「Import」** 下部の Enrich セクション
-2. Serato のライブラリが自動検出されるので、選択して **「Enrich」** を実行
+1. Go to **"Library"** → **"Import"**, scroll down to the Enrich section
+2. Your Serato library will be auto-detected — select it and click **"Enrich"**
 
-> **CSV エクスポートについて**: Serato の History タブから CSV をエクスポートすることもできますが、CSV に含まれるカラムは**その時点で画面に表示している項目に依存**します（例: Key カラムを表示していなければ CSV にも含まれません）。セッションファイル（`.txt`）+ Enrich の方が確実です。
+> **About CSV export**: You can also export CSV from Serato's History tab, but the columns included in the CSV **depend on what columns you have displayed in the UI** at the time of export (e.g., if Key is not shown, it won't be in the CSV). Session files (`.txt`) + Enrich is the more reliable method.
 
 </details>
 
 <details>
-<summary>rekordbox — 1ステップ（master.db だけでOK）</summary>
+<summary>rekordbox — 1 Step (just master.db)</summary>
 
-rekordbox は `master.db` ファイル1つにプレイ履歴もトラックメタデータもすべて格納しているため、**1回のインポートで完結**します。
+rekordbox stores both play history and track metadata in a single `master.db` file, so **one import does everything**.
 
-1. `master.db` ファイルを探す:
+1. Locate your `master.db`:
    - **Mac**: `~/Library/Pioneer/rekordbox/master.db`
    - **Windows**: `%APPDATA%\Pioneer\rekordbox\master.db`
-2. `master.db` をドラッグ＆ドロップ、または「Browse」で選択
+2. Drag & drop `master.db`, or select it via "Browse"
 
-これだけで**プレイ履歴 + BPM + Key + Genre** がすべて取り込まれます。Enrich の実行は不要です。
+This imports **play history + BPM + Key + Genre** all at once. No Enrich step needed.
 
-> **ヒント**: master.db は読み取り専用でアクセスします。rekordbox のデータが変更されることはありません。
+> **Note**: master.db is accessed read-only. Your rekordbox data will not be modified.
 
-> **XMLエクスポートについて**: rekordbox の「コレクションをxml形式でエクスポート」で書き出したXMLファイルも読み込めますが、XML にはプレイ履歴（HISTORY）が含まれません。Enrich ソース（BPM/Key補完用）としてのみ使用できます。
+> **About XML export**: rekordbox's "Export collection in xml format" can also be imported, but XML does **not** contain play history (HISTORY). Use it only as an Enrich source for BPM/Key.
 
 </details>
 
 <details>
-<summary>Traktor — 1ステップ（collection.nml だけでOK）</summary>
+<summary>Traktor — 1 Step (just collection.nml)</summary>
 
-Traktor も `collection.nml` ファイル1つにプレイ履歴とトラックメタデータが含まれているため、**1回のインポートで完結**します。
+Traktor also stores both play history and track metadata in a single `collection.nml` file, so **one import does everything**.
 
 - **Mac**: `~/Documents/Native Instruments/Traktor X.X.X/collection.nml`
 - **Windows**: `Documents\Native Instruments\Traktor X.X.X\collection.nml`
 
-collection.nml ファイルをドラッグ＆ドロップ、または「Browse」で選択してください。
-プレイ履歴 + BPM + Key がすべて取り込まれます。
+Drag & drop collection.nml, or select it via "Browse".
+Play history + BPM + Key are all imported at once.
 
 </details>
 
-#### まとめ: アプリ別の取り込みフロー
+#### Summary: Import Flow by DJ Software
 
-| DJソフト | 手順 | Import ソース | Enrich 必要？ |
+| DJ Software | Steps | Import Source | Enrich Needed? |
 |:---|:---|:---|:---:|
-| **Serato DJ** | 2ステップ | `Sessions/` フォルダ → Enrich | **必要** |
-| **rekordbox** | 1ステップ | `master.db` | 不要 |
-| **Traktor** | 1ステップ | `collection.nml` | 不要 |
+| **Serato DJ** | 2 steps | `Sessions/` folder → Enrich | **Yes** |
+| **rekordbox** | 1 step | `master.db` | No |
+| **Traktor** | 1 step | `collection.nml` | No |
 
-### BPM / Key の付与（Enrich）
+### BPM / Key Enrichment (Enrich)
 
-Import済みのトラックにBPM・Key情報を補完する機能です。主に **Serato ユーザー**が使用します（rekordbox / Traktor は Import 時に自動取得されます）。
+Adds BPM & Key metadata to previously imported tracks. Primarily used by **Serato users** (rekordbox / Traktor tracks get this data automatically during import).
 
-1. **「Library」** タブ → **「Import」** サブタブ下部の **Enrich** セクション
-2. DJソフトウェアのライブラリが自動検出されます（検出されない場合は「Add Source...」で手動指定）
-3. 検出されたソースを選択して **「Enrich」** を実行
+1. Go to **"Library"** tab → **"Import"** sub-tab, scroll to the **Enrich** section
+2. DJ software libraries are auto-detected (if not found, use "Add Source..." to specify manually)
+3. Select a source and click **"Enrich"**
 
-| ソース | Enrich対象データ | 備考 |
+| Source | Data | Notes |
 |:---|:---|:---|
 | **Serato** `_Serato_/` | BPM, Key | database V2 + streaming Metadata |
-| **rekordbox** `master.db` | BPM, Key | Import時に取得済みなら不要 |
-| **rekordbox** XML | BPM, Key | master.db がない場合のフォールバック |
-| **Traktor** `collection.nml` | BPM, Key | Import時に取得済みなら不要 |
+| **rekordbox** `master.db` | BPM, Key | Not needed if already imported via master.db |
+| **rekordbox** XML | BPM, Key | Fallback when master.db is unavailable |
+| **Traktor** `collection.nml` | BPM, Key | Not needed if already imported via collection.nml |
 
-### 主な機能
+### Features
 
-| タブ | 内容 |
+| Tab | Description |
 |:---|:---|
-| **Dashboard** | トラック数、セッション数、Top Tracks/Artists、曜日・時間帯分析 |
-| **Tracks** | 全トラック一覧（Key・BPM・Tag フィルタ、インライン詳細展開、表示件数切替） |
-| **Transitions** | トランジション統計、Top Pairs、N-Track Chains、Artist Transitions、Deck Analysis |
-| **Insights** | Hub Tracks、Entropy Map、Bridge Tracks、Set Diversity、Escape Routes |
-| **Flow** | 指定トラックの前後遷移を可視化 |
-| **Network** | トランジションネットワークグラフ（ノード内に Key・BPM 表示） |
-| **Progression** | セッションごとの BPM・Key 変化分析 |
-| **Escapes** | 定番遷移からの脱出候補提案（トラック検索対応） |
-| **Rediscover** | 最近使っていないが以前よく使った曲の再発見 |
-| **Explorer** | セットリスト手動構築（次トラック候補をリアルタイム提案） |
-| **Generator** | 遷移実績に基づくセットリスト自動生成 |
-| **Setlists** | 保存済みセットリストの管理・CSV出力 |
-| **Settings** | Key表記（Camelot/Musical）、フォントサイズ、テーマ、エクスポート先 |
+| **Dashboard** | Track/session counts, top tracks/artists, day-of-week & hourly analysis |
+| **Tracks** | Full track list with Key/BPM/Tag filters, inline detail expansion, page size control |
+| **Transitions** | Transition stats, top pairs, N-track chains, artist transitions, deck analysis |
+| **Insights** | Hub tracks, entropy map, bridge tracks, set diversity, escape routes |
+| **Flow** | Visualize before/after transitions for a selected track |
+| **Network** | Transition network graph with Key & BPM displayed inside nodes |
+| **Progression** | Per-session BPM & Key change analysis |
+| **Escapes** | Suggest alternative transitions from well-worn patterns (with track search) |
+| **Rediscover** | Find tracks you used to play frequently but haven't played recently |
+| **Explorer** | Manual setlist builder with real-time next-track suggestions |
+| **Generator** | Auto-generate setlists based on transition history |
+| **Setlists** | Manage saved setlists, export to CSV |
+| **Settings** | Key notation (Camelot/Musical), font size, theme, export directory |
 
 ---
 
-## プライバシーと安全性
+## Privacy & Safety
 
-以下はソースコードの実装に基づく事実です。
+The following is based on the source code implementation.
 
-### 外部通信
+### Network Communication
 
-**このアプリはインターネット通信を一切行いません。**
+**This app makes no internet connections whatsoever.**
 
-- HTTPクライアントライブラリ（reqwest, hyper等）を含んでいません
-- フロントエンドからの外部URL接続はCSP（Content Security Policy）で制限されています
-- Tauri の権限設定（capabilities）でネットワークAPIは許可されていません
+- No HTTP client libraries (reqwest, hyper, etc.) are included
+- Frontend external URL connections are restricted by CSP (Content Security Policy)
+- Tauri capabilities do not permit network APIs
 
-### テレメトリ・分析
+### Telemetry
 
-**使用状況の収集、クラッシュレポート、分析用トラッキングは一切行いません。**
+**No usage data collection, crash reporting, or analytics tracking of any kind.**
 
-### ファイルアクセス
+### File Access
 
-- **読み取り**: ユーザーがファイルダイアログで明示的に選択したDJソフトウェアのファイルのみ
-- **書き込み**: アプリデータフォルダ内のSQLiteデータベース（`dj_history.db`）と、ユーザーが指定したエクスポート先へのCSVファイルのみ
-- **既存ファイルの改変**: DJソフトウェアの元ファイルを変更・削除することはありません（読み取り専用）
+- **Read**: Only DJ software files explicitly selected by the user via the file dialog
+- **Write**: Only the SQLite database (`dj_history.db`) in the app data folder, and CSV files to user-specified export destinations
+- **No modification**: Your DJ software's original files are never modified or deleted (read-only access)
 
-### BPM/Key Enrich 時の自動検出について
+### Enrich Auto-Detection
 
-Enrichソース検出時に、以下のディレクトリの存在を確認します（ファイル内容の読み取りは行いません）:
+When detecting Enrich sources, the app checks for the existence of these directories (file contents are not read):
 
-- **macOS**: `/Volumes/` 配下の外部ドライブ
-- **Windows**: D: 〜 Z: ドライブ
+- **macOS**: External drives under `/Volumes/`
+- **Windows**: Drives D: through Z:
 
-これはDJソフトウェアのライブラリフォルダを検出する目的のみで使用されます。ユーザーが「Enrich」を実行するまで、検出されたファイルの読み取りは行われません。
+This is used solely to locate DJ software library folders. No files are read until the user explicitly runs "Enrich".
 
-### データ保存場所
+### Data Storage
 
-全データはローカルに保存されます:
+All data is stored locally:
 
-| OS | パス |
+| OS | Path |
 |:---|:---|
 | macOS | `~/Library/Application Support/com.kohadachan.dj-mix-analyzer/` |
 | Windows | `%APPDATA%\com.kohadachan.dj-mix-analyzer\` |
 
-詳細は [PRIVACY.md](PRIVACY.md) をご覧ください。
+See [PRIVACY.md](PRIVACY.md) for full details.
 
 ---
 
-## 既知の制限事項
+## Known Limitations
 
-- macOS Intel版のビルドは提供していません（Apple Silicon のみ）
-- コード署名されていないため、OS の警告が表示されます
-- Serato セッションファイル（.txt）にはBPM/Key情報が含まれないため、Enrich機能でSeratoのDBから補完する必要があります
-- Serato 4.0.x の CSV エクスポートからは BPM・Key を直接取得できます（日本語ロケールにも対応）
-- ベータ版のため、予期しない動作がある可能性があります
+- No macOS Intel build available (Apple Silicon only)
+- The app is not code-signed, so OS warnings will appear on first launch
+- Serato session files (.txt) do not include BPM/Key — use the Enrich feature to add them from Serato's database
+- Serato 4.0.x CSV exports include BPM & Key directly (Japanese locale also supported)
+- Beta software — unexpected behavior may occur
 
-## フィードバック
+## Feedback
 
-バグ報告や機能リクエストは [Issue](../../issues) からお願いします。
-バグ報告の際は [テンプレート](../../issues/new?template=bug_report.yml) をご利用ください。
+Please report bugs or feature requests via [Issues](../../issues).
+For bug reports, please use the [template](../../issues/new?template=bug_report.yml).
 
 ---
 
-## 免責事項
+## Disclaimer
 
-本ソフトウェアは「現状のまま（AS IS）」で提供されます。作者は、本ソフトウェアの使用または使用不能に起因するいかなる損害（データの損失、機器の不具合、その他一切の直接的・間接的損害を含む）についても責任を負いません。ベータ版のため、予期しない動作が発生する可能性があります。使用にあたっては、重要なデータのバックアップを事前に行ってください。
+This software is provided "AS IS" without warranty of any kind. The author shall not be liable for any damages arising from the use or inability to use this software, including but not limited to data loss, equipment malfunction, or any other direct or indirect damages. As beta software, unexpected behavior may occur. Please back up important data before use.
 
-本ソフトウェアをインストールまたは使用された場合、この免責事項に同意されたものとみなします。
+By installing or using this software, you agree to this disclaimer.
 
-## ライセンス
+## License
 
-All rights reserved. このソフトウェアのソースコードは非公開です。
-本リポジトリで配布されるインストーラーは、個人利用目的でのみ使用できます。
-
-
-
+All rights reserved. The source code of this software is proprietary.
+Installers distributed through this repository are licensed for personal use only.
